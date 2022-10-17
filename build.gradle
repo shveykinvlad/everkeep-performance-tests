@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    ext {
+        gatlingVersion = '3.8.4'
+        checkstyleVersion = '10.3.4'
+        pmdVersion = '6.50.0'
+        spotbugsVersion = '5.0.12'
+    }
+
+    dependencies {
+        classpath "gradle.plugin.io.gatling.gradle:gatling-gradle-plugin:${gatlingVersion}"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:${spotbugsVersion}"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.gatling.gradle'
+apply plugin: 'checkstyle'
+apply plugin: 'com.github.spotbugs'
+apply plugin: 'pmd'
+
+group 'com.everkeep'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    implementation "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+checkstyle {
+    toolVersion = checkstyleVersion
+    ignoreFailures = false
+}
+
+spotbugs {
+    excludeFilter = file("../config/spotbugs/spotbugs-exclude.xml")
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = pmdVersion
+    ruleSets = ["config/pmd/pmd.xml"]
+}
+
+test.enabled(false)

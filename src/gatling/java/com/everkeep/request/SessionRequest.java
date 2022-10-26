@@ -26,5 +26,4 @@ public final class SessionRequest {
                 .check(jsonPath("$.refreshToken").exists())
                 .check(jsonPath("$.email").exists());
     }
-
 }

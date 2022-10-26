@@ -19,9 +19,10 @@ public final class SessionRequest {
                 .post(BASE_PATH)
                 .body(ElFileBody("body/session/session-create.json"))
                 .check(status().is(201))
-                .check(jsonPath("$.authToken")
-                        .exists()
-                        .saveAs("authToken")
+                .check(
+                        jsonPath("$.authToken")
+                                .exists()
+                                .saveAs("authToken")
                 )
                 .check(jsonPath("$.refreshToken").exists())
                 .check(jsonPath("$.email").exists());

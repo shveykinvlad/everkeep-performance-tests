@@ -1,0 +1,4 @@
+{
+  "email": "#{userEmail}",
+  "password": "#{userPassword}"
+}

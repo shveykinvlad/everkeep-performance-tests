@@ -8,6 +8,7 @@ buildscript {
         checkstyleVersion = '10.3.4'
         pmdVersion = '6.50.0'
         spotbugsVersion = '5.0.12'
+        lombokVersion = '1.18.24'
     }
 
     dependencies {
@@ -42,7 +43,7 @@ checkstyle {
 }
 
 spotbugs {
-    excludeFilter = file("../config/spotbugs/spotbugs-exclude.xml")
+    excludeFilter = file("config/spotbugs/spotbugs-exclude.xml")
 }
 
 pmd {

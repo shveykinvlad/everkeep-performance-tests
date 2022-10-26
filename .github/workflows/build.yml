@@ -28,6 +28,11 @@ jobs:
           distribution: ${{ matrix.distribution }}
           cache: 'gradle'
 
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
@@ -36,3 +41,6 @@ jobs:
     
       - name: Execute Gradle build
         run: ./gradlew build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2

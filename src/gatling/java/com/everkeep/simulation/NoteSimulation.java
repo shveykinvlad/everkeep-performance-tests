@@ -20,9 +20,9 @@ import java.time.Duration;
 
 public class NoteSimulation extends Simulation {
 
-    private final int userCount = Integer.parseInt(System.getProperty("USERS"));
-    private final int rampDuration = Integer.parseInt(System.getProperty("RAMP_DURATION"));
-    private final int duration = Integer.parseInt(System.getProperty("DURATION"));
+    private static final int USER_COUNT = Integer.parseInt(System.getProperty("USERS"));
+    private static final int RAMP_DURATION = Integer.parseInt(System.getProperty("RAMP_DURATION"));
+    private static final int DURATION = Integer.parseInt(System.getProperty("DURATION"));
 
     private final FeederBuilder<String> usersFeeder = csv("users.csv").random();
 
@@ -56,11 +56,11 @@ public class NoteSimulation extends Simulation {
                 crud.injectOpen(
                                 nothingFor(5),
                                 atOnceUsers(5),
-                                rampUsers(userCount).during(rampDuration)
+                                rampUsers(USER_COUNT).during(RAMP_DURATION)
                         )
                         .protocols(httpProtocol)
         )
-                .maxDuration(Duration.ofSeconds(duration))
+                .maxDuration(Duration.ofSeconds(DURATION))
                 .assertions(
                         global().responseTime().max().lt(20),
                         global().successfulRequests().percent().gt(99.0)

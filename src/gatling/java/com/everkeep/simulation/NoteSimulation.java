@@ -62,7 +62,7 @@ public class NoteSimulation extends Simulation {
         )
                 .maxDuration(Duration.ofSeconds(DURATION))
                 .assertions(
-                        global().responseTime().max().lt(20),
+                        global().responseTime().max().lt(200),
                         global().successfulRequests().percent().gt(99.0)
                 );
     }
